@@ -112,12 +112,14 @@ The app must have the `Contacts.Read` or `Contacts.Write` permission.
   must have its path match the path of _REPLY URL_ in AAD. For example, if the _REPLY URL_ value is `http://localhost:1337/auth/azureOAuth/callback`, the app
   must enact a routing rule of the `app.get('/auth/azureOAuth/callback', callback)` format.
   
-- To ensure all the node modules are included in the project, run the `npm install` command under the app's main directory, where the _package.json_ file is located, from a shell window. 
-  If using Visual Studio, you can try to rebuild the solution before running the app.
+- To ensure all the node modules are included in the project, run the `npm install` command under the app's main directory, 
+  where the _package.json_ file is located, from a shell window. 
+
+  If using Visual Studio, right click the **npm** node in the **Solution Explorer** to select **Install Missing npm Packages** before running the app.
 
 - To run the app in Visual Studio, hit F5. 
 
-- To run the app in node shell, go to the app's bin directory and type `node www` to start the server. Then open a browser and enter "http://localhost:1337" in the address bar, assuming the default setting is preserved.
+  To run the app in node shell, go to the app's bin directory and type `node www` to start the server. Then open a browser and enter "http://localhost:1337" in the address bar, assuming the default setting is preserved.
 
 - Happy coding!
 
