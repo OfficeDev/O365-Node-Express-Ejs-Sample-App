@@ -1,0 +1,78 @@
+<!doctype html>
+<!-- 
+/*
+ *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
+ */
+-->
+<html>
+<head>
+    <title>An Office 365 API Sample App Using Node-Express-Ejs</title>
+  <style>
+    body {padding-top:20px; padding-left:50px; padding-right:50px}
+    .rightAlign { text-align:right}
+    .leftAlign { text-align:left}
+    .centerAlign { text-align:center}
+  </style>
+</head>
+<body class="centerAlign">
+	<div name="banner">
+      <h1>Office 365 API Tasks | Contacts</h1>
+        <p>
+          <% if (data.user) { %><%= data.user.profile.displayname %> |  <% } %>
+          <a href="/logout">Sign out</a>
+        </p>
+	</div>
+    <div name="menu">
+		<a href="/discovery">Discovery</a> |
+		<a href="/calendar">Calendar</a> |
+		<b>Contacts</b> |
+		<a href="/file">File</a> |
+		<a href="/mail">Mail</a> 
+    </div>	
+
+	<div name="contacts" class="leftAlign">
+	  <% if (data.contacts) { %>
+		<ul>
+			<% for (var i=0; i<data.contacts.length; i++) { %> 
+			<li>
+				<div><%= JSON.stringify(data.contacts[i]) %></div>
+			</li>
+			<% } %>
+		</ul>
+	  <% } %>
+	</div>
+
+</body>
+</html>
+
+<!-- 
+// *********************************************************
+//
+// O365-Node-Express-Ejs-Sample-App, https://github.com/OfficeDev/O365-Node-Express-Ejs-Sample-App
+//
+// Copyright (c) Microsoft Corporation
+// All rights reserved.
+//
+// MIT License:
+// Permission is hereby granted, free of charge, to any person obtaining
+// a copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to
+// permit persons to whom the Software is furnished to do so, subject to
+// the following conditions:
+//
+// The above copyright notice and this permission notice shall be
+// included in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
+// *********************************************************
+
+-->

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "O365NodeExpressEjs", "O365NodeExpressEjs.njsproj", "{A30D29C0-EBDA-4A16-A359-E44C775D204A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A30D29C0-EBDA-4A16-A359-E44C775D204A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A30D29C0-EBDA-4A16-A359-E44C775D204A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A30D29C0-EBDA-4A16-A359-E44C775D204A}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{A30D29C0-EBDA-4A16-A359-E44C775D204A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A30D29C0-EBDA-4A16-A359-E44C775D204A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A30D29C0-EBDA-4A16-A359-E44C775D204A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A30D29C0-EBDA-4A16-A359-E44C775D204A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A30D29C0-EBDA-4A16-A359-E44C775D204A}.Release|ARM.ActiveCfg = Release|Any CPU
+		{A30D29C0-EBDA-4A16-A359-E44C775D204A}.Release|x64.ActiveCfg = Release|Any CPU
+		{A30D29C0-EBDA-4A16-A359-E44C775D204A}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

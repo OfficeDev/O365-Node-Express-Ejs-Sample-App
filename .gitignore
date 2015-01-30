@@ -1,0 +1,16 @@
+# Built application files
+# *.dll
+
+
+# code analysis data files
+*.dat
+
+# Generated files
+obj/
+
+
+# node_modules 
+node_modules/
+
+# Log Files
+*.log
