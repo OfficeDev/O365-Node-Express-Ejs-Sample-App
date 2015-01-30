@@ -115,5 +115,13 @@ The app must have the `Contacts.Read` or `Contacts.Write` permission.
 - To ensure all the node modules are included in the project, run the `npm install` command under the app's main directory, where the _package.json_ file is located, from a shell window. 
   If using Visual Studio, you can try to rebuild the solution before running the app.
 
+- To run the app in Visual Studio, hit F5. 
+
+- To run the app in node shell, go to the app's bin directory and type `node www` to start the server. Then open a browser and enter "http://localhost:1337" in the address bar, assuming the default setting is preserved.
+
+- Happy coding!
+
+
+
 ## Copyright
 Copyright (c) Microsoft. All rights reserved.
