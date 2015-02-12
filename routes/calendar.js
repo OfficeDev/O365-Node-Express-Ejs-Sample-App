@@ -10,7 +10,7 @@ module.exports = function (app, passport, utils) {
     app.get('/calendar', function (req, res, next) {
         var calendarUrl = appSettings.apiEndpoints.exchangeBaseUrl + "/events"; 
         request.get(calendarUrl,
-            { auth : { 'bearer' : passport.user.accessToken } },
+            { auth : { 'bearer' : passport.user.getToken(appSettings.resources.exchange).access_token } },
             function (error, response, body) {
             if (error) next(error)
             else if (!body) {

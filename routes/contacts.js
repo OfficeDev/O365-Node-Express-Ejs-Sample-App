@@ -9,10 +9,12 @@ var appSettings = require('../models/appSettings.js');
 
 // express app routes for contacts rest api  calls
 module.exports = function (app, passport, utils) {
+    
+    // Get a lit of contacts and display the raw data (odata format as a JSON string).
     app.get('/contacts', function (req, res, next) {
         var calendarUrl = appSettings.apiEndpoints.exchangeBaseUrl + "/contacts"; 
         request.get(calendarUrl,
-            { auth : { 'bearer' : passport.user.accessToken } },
+            { auth : { 'bearer' : passport.user.getToken(appSettings.resources.exchange).access_token } },
             function (error, response, body) {
             if (error) next(error)
             else {

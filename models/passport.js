@@ -6,32 +6,25 @@ var AzureOAuthStrategy = require('passport-azure-oauth').Strategy;
 var User = require('./user.js');
 var AppSettings = require('./appSettings.js');
 
-module.exports=function (passport) {
-    // =========================================================================
-    // passport session setup ==================================================
-    // =========================================================================
-    // required for persistent login sessions
-    // passport needs ability to serialize and unserialize users out of session
-    
+module.exports = function (passport) {    
+
     // used to serialize the user for the session
-    passport.serializeUser(function (user, done) {
-        done(null, user);
+    passport.serializeUser(function (user, next) {
+        next(null, user);
     });
     
     // used to deserialize the user
-    passport.deserializeUser(function (id, done) {
+    passport.deserializeUser(function (id, next) {
         User.findById(id, function (err, user) {
-            done(err, user);
+            next(err, user);
         });
     });
     
-
     // For information on the profile entries: see http://msdn.microsoft.com/en-us/library/azure/dn645542.aspx
     passport.use('azureoauth',  new AzureOAuthStrategy(
         AppSettings.oauthOptions, 
-        function Verify(accessToken, refreshToken, params, profile, done) {
-        User.validate(
-            {
+        function Verify(accessToken, refreshToken, params, profile, next) {
+            User.validate({
                 'accessToken' : accessToken, 
                 'refreshToken' : refreshToken, 
                 'tokenParams': params, 
@@ -40,16 +33,16 @@ module.exports=function (passport) {
             function (err, user) {
                 passport.user = null;
                 if (err)
-                    return done(err);                
+                    return next(err);                
                 if (!user)
-                    return done('Cannot verify the user ' + profile.displayname + ', ' + profile.username);                                
+                    return next('Cannot verify the user ' + profile.displayname + ', ' + profile.username);                                
                 // all is well, return successful user
-                passport.user = user;
-                return done(null, user);
+                passport.user = user;               
+                return next(null, user);
             });
         })
     );
-
+    
 };
 
 // *********************************************************

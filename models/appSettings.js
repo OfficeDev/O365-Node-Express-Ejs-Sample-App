@@ -4,22 +4,41 @@
 
 
 (function (appSettings) {
+    
+    // Configure the OAuth options to match your app.
     appSettings.oauthOptions = {
         clientId : "646a412d-c4a6-4a76-823a-eb0d70519dc5"
         ,clientSecret : "pi2o7cnLWpbJoH+CVNW3YXXkml/XysM7odVMEMeiCmQ="
         ,tenantId : "b7e72cd7-4df7-4e7e-b5ff-3310c56629e5"
-        ,resource : "https://outlook.office365.com/" //"https%3A%2F%2Foutlook.office365.com%2F"
-        //,redirectURL : "http://localhost:1337/auth/azureoauth/callback" // this is set in AAD for this app
+        ,resource : "https://outlook.office365.com/"
+        // The redirectURL is set in AAD. For the following redirectURL,  
+        //,redirectURL : "http://localhost:1337/auth/azureoauth/callback" 
+        // The app needs to supply a matching middleware:
+        //      app.get('/auth/azureoauth/callback', ...) 
+        // to receive the auth results
     };
+    
+    // Set the Azure tenant for your Office 365 Developer site.
+    appSettings.tenant = "haymuto";  
+    
+    appSettings.resources = {
+        exchange : "https://outlook.office365.com/",
+        onedrive : 'https://' + appSettings.tenant + '-my.sharepoint.com/',
+        sharepoint : 'https://' + appSettings.tenant + '.sharepoint.com/',
+        discovery : 'https://api.office.com/'
+    }
 
     appSettings.apiEndpoints = {
         exchangeBaseUrl : "https://outlook.office365.com/api/v1.0/me",
-        oneDriveBusinessBaseUrl : "https://" + appSettings.oauthOptions.tenantId + "-my.sharepoint.com/_api/v1.0/me",
-        publicSharePointBaseUrl : "https://" + appSettings.oauthOptions.tenantId + ".sharepoint.com/haymuto-public/_api/v1.0",
-        teamSharePointBaseUrl : "https://" + appSettings.oauthOptions.tenantId + ".sharepoint.com/haymuto/_api/v1.0",
-        discoveryServiceBaseUrl : "https://api.office.com/discovery/v1.0/me"
-
+        oneDriveBusinessBaseUrl : "https://" + appSettings.tenant + "-my.sharepoint.com/_api/v1.0/me",
+        publicSharePointBaseUrl : "https://" + appSettings.tenant + ".sharepoint.com/" + appSettings.tenant + "-public/_api/v1.0",
+        teamSharePointBaseUrl : "https://" + appSettings.tenant + ".sharepoint.com/" + appSettings.tenant + "/_api/v1.0",
+        discoveryServiceBaseUrl : "https://api.office.com/discovery/v1.0/me",
+        accessTokenRequestUrl : "https://login.windows.net/common/oauth2/token"
     };
+    
+    appSettings.useFiddler = true;
+
 })(module.exports);
 
 // *********************************************************

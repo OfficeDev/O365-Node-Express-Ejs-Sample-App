@@ -9,6 +9,7 @@ var appSettings = require('../models/appSettings.js');
 
 // express app routes for discovery services rest api  calls
 module.exports = function (app, passport, utils) {
+    
     app.get('/discovery', function (req, res, next) {
         res.render('discovery', { data: { user: passport.user } });
     });

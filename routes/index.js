@@ -35,17 +35,11 @@ module.exports = function (app, passport) {
     
     // =====================================
     // cache and handle access token and refresh token as returned from AAD. 
-    // The accessToken 
+    // This presumes that the app's redirectURL is set in AAD as
+    // 'http://host/auth/azureOAuth/callback' 
     app.get('/auth/azureOAuth/callback', 
         passport.authenticate('azureoauth', { failureRedirect: '/' }),
-        function (req, res) {
-            console.log('user authenticated');
-            //var options = url.parse(req.url, true);
-            //var code = options.query.code;
-            //var sessionState = options.query.session_state;
-            //var username = passport.user.profile.username;
-		// not to check if IsLoggedIn true
-        res.render('apiTasks', {title: 'O365-Node-Express-Ejs | Tasks', user : req.user});
+        function (req, res) {res.render('apiTasks', {title: 'O365-Node-Express-Ejs | Tasks', user : req.user});
     });
     
     
@@ -55,11 +49,8 @@ module.exports = function (app, passport) {
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
-    app.get('/api/tasks', isLoggedIn, 
-        function (req, res) {
-        res.render('apiTasks', { title : 'O365NodeExpressEjs | Tasks',
-            username : req.user.username // get the user out of session and pass to template
-        });
+    app.get('/api/tasks', isLoggedIn, function (req, res) {
+        res.render('apiTasks', { title : 'O365NodeExpressEjs | Tasks', username : req.user.username });
     });
     
     // =====================================
@@ -76,12 +67,12 @@ module.exports = function (app, passport) {
 function isLoggedIn(req, res, next) {
     
     // if user is authenticated in the session, carry on 
-    //if (req.isAuthenticated())
-	if (req.user.username && req.user.profile.accessToken) // debug
+    // otherwise, redirect the request to the home page
+    if (req.user.username && req.user.access_token) {
         return next();
-    console.log('user is not logged in.')
-    // if they aren't redirect them to the home page
-    res.redirect('/');
+    } else {
+        res.redirect('/');
+    }
 }
 
 // *********************************************************

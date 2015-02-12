@@ -5,6 +5,8 @@
 var cheerio = require('cheerio');
 
 (function (utils) {
+    
+    // Extracting <p> values from HTML fragment as plain text
     utils.htmlText = function (htmlFrag) {
         var dom = cheerio.load(htmlFrag);
         // return texts of all p tags

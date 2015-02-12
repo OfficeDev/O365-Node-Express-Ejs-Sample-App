@@ -3,7 +3,7 @@
 This simple Office 365 API sample app demonstrates how to program Office 365 REST API
 in a Web application using [Nodejs](http://nodejs.org/), [Expressjs](http://expressjs.com/) 
 and [Ejs](http://www.embeddedjs.com/). It is meant to provide a quick 
-introduction, by way of a few coding examples, to getting started to explore integrating 
+introduction, by way of a few tested examples, to getting started to explore  
 Office 365 API features in an Express-based web application. Specifically, it covers how to
 
 - [sign in to a user's Office 365 account](#sign-in), using the [passport-azure-oauth](https://www.npmjs.com/package/passport-azure-oauth) module,
@@ -13,7 +13,8 @@ Office 365 API features in an Express-based web application. Specifically, it co
 - [send a new mail message](#send-mail) to a specified recipient,
 - [reply a mail with comments](#reply-mail), 
 - [get the user's calendar events](#get-calendar-events),
-- [get the user's contacts](#get-contacts), and
+- [get the user's contacts](#get-contacts), 
+- [inspect the user's files drive on OneDrive for Business](#get_files) and
 - [make the app work](#make-app-work).
 
 As a sample app to show programming of Office 365 APIs, no elaborate patterns or error handlings are attempted for node/express/ejs programming. 
@@ -93,6 +94,15 @@ The app must have the `Calendar.Read` or `Calendar.Write` permission.
 
 This involves a GET request against the calendar events resource (`https://outlook.office365.com/api/v1.0/me/contacts`).
 The app must have the `Contacts.Read` or `Contacts.Write` permission.
+
+<a name="get-files">
+## Get the user's files on OneDrive for Business
+
+This involves a GET request against the OneDrive for Business `drive` resource 
+(`https://{tenant}-my.sharepoint.com/_api/v1.0/me/drive`). For an Office 365 developer site
+with the domain name of `contoso.onmicrosoft.com`, the `{tenant}` value is `contoso`.
+The app must have appropriate permissions to the Office 365 SharePoint Online service as configured
+in Azure Active Directory.
 
 
 <a name="make-app-work">
