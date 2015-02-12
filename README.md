@@ -108,6 +108,8 @@ in Azure Active Directory.
 <a name="make-app-work">
 ## Make the app work
 
+- If you have not done so, install [node.js](http://nodejs.org/download/) to your working machine.
+
 - Configure the app in your Azure Active Directory (AAD) subscription. For more information on how to do this in general, see the setup insturctions listed in
   [Office 365 APIs Starter project for Android](https://github.com/OfficeDev/O365-Android-Start).
 
