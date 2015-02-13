@@ -30,9 +30,19 @@
 		<a href="/mail">Mail</a> 
     </div>	
 	
-	<div name="display" class="leftAlign">
-		<p>Under construction.</p>
-	</div>
+    <div name="display" >
+    <h2>Files</h2>
+    <% if (data.result) { %>
+        <div class="leftAlign"><%= JSON.stringify(data.result) %></div>
+        <ul class="leftAlign">
+        <% for(var key in data.result) { %>
+            
+            <li><div class="leftAlign"><%= key %> : <%= data.result[key] %></div></li>
+            
+        <% } %>
+        </ul>
+    <% } %>
+    </div>
 </body>
 </html>
 

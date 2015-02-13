@@ -7,6 +7,7 @@ introduction, by way of a few tested examples, to getting started to explore
 Office 365 API features in an Express-based web application. Specifically, it covers how to
 
 - [sign in to a user's Office 365 account](#sign-in), using the [passport-azure-oauth](https://www.npmjs.com/package/passport-azure-oauth) module,
+- [discover available Office 365 API services](#discover services),
 - [get mail messages](#get-mails) from the user's inbox, using the [request](https://github.com/request/request) module,
 - [view a specific mail message](#view-mail),
 - [delete a specific mail message](#delete-mail),
@@ -40,6 +41,11 @@ host name and port are configured for the app. For details of an implementation,
 The app caches the returned access token for use in subsequent HTTPS requests to access any Office 365 API functioinality. 
 If the access token is expired, it can be refreshed using the refresh token, provided that the refresh token remains valid. Otherwise, the app will 
 need to go through the sign-in process again.
+
+<a name="discover-services">
+## Discover Office 365 API services available for the user's
+
+This shows how to perform dicovery of the Office 365 API services availble for the signed-in user. 
 
 <a name="get-mails">
 ## Get mail messages from the user's Inbox
