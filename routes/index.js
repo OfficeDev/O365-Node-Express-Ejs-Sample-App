@@ -2,25 +2,23 @@
  *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
  */
 
+// routes/index.js
+
 var url = require('url');
 var appSettings = require('../models/appSettings.js');
 
-// routes/index.js
 module.exports = function (app, passport) {
     
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
     app.get('/', function (req, res) {
-        // load the index.jade or index.ejs file, 
-        // depending on the view engine selected
         res.render('index', {title: 'O365-Node-Express-Ejs | Home'}); 
     });
     
     // =====================================
     // LOGIN ===============================
     // =====================================
-    // show the login form
     app.get('/login', function (req, res) {
         // redirect the login request to Azure Active Directory oauth2
         res.redirect('/auth/azureOAuth');
@@ -28,7 +26,7 @@ module.exports = function (app, passport) {
     
     // =====================================
     // Starts Azure authentication/authorization
-    //
+    // =====================================
     app.get('/auth/azureOAuth', 
         passport.authenticate('azureoauth', { failureRedirect: '/' })
     );
@@ -36,23 +34,15 @@ module.exports = function (app, passport) {
     // =====================================
     // cache and handle access token and refresh token as returned from AAD. 
     // This presumes that the app's redirectURL is set in AAD as
-    // 'http://host/auth/azureOAuth/callback' 
+    // 'http://{host}/auth/azureOAuth/callback' 
     app.get('/auth/azureOAuth/callback', 
         passport.authenticate('azureoauth', { failureRedirect: '/' }),
-        function (req, res) {res.render('apiTasks', {title: 'O365-Node-Express-Ejs | Tasks', user : req.user});
+        function (req, res) {
+            console.dir(passport.user.tokens);
+            res.render('apiTasks', { user : passport.user });
     });
     
-    
-    
-    // =====================================
-    // API task SECTION =====================
-    // =====================================
-    // we will want this protected so you have to be logged in to visit
-    // we will use route middleware to verify this (the isLoggedIn function)
-    app.get('/api/tasks', isLoggedIn, function (req, res) {
-        res.render('apiTasks', { title : 'O365NodeExpressEjs | Tasks', username : req.user.username });
-    });
-    
+       
     // =====================================
     // LOGOUT ==============================
     // =====================================
@@ -63,17 +53,6 @@ module.exports = function (app, passport) {
 
 };
 
-// route middleware to make sure a user is logged in
-function isLoggedIn(req, res, next) {
-    
-    // if user is authenticated in the session, carry on 
-    // otherwise, redirect the request to the home page
-    if (req.user.username && req.user.access_token) {
-        return next();
-    } else {
-        res.redirect('/');
-    }
-}
 
 // *********************************************************
 //

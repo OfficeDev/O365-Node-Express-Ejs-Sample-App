@@ -35,7 +35,12 @@
 		<ul>
 			<% for (var i=0; i<data.contacts.length; i++) { %> 
 			<li>
-				<div><%= JSON.stringify(data.contacts[i]) %></div>
+				<h4><%= data.contacts[i].DisplayName %></h4>
+				<table border="1">
+					<% for (var key in data.contacts[i]) { %>
+						<tr><td><%= key %><td></td> <td><%= JSON.stringify(data.contacts[i][key]) %></td></tr>
+				    <% } %>
+				</table>
 			</li>
 			<% } %>
 		</ul>

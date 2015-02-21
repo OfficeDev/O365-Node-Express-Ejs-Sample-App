@@ -10,6 +10,9 @@ var appSettings = require('../models/appSettings.js');
 
 
 module.exports = function (app, passport, utils) {
+    app.use('/mail', function (req, res, next) {
+        passport.getAccessToken(appSettings.resources.exchange, req, res, next);
+    })
 
     // Get a messaget list in the user's Inbox using the O365 API,
     // displaying To, Subject and Preview for each message.

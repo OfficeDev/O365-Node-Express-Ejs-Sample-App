@@ -31,14 +31,18 @@
     </div>	
 	
     <div name="display" >
-    <h2>Files</h2>
-    <% if (data.result) { %>
-        <div class="leftAlign"><%= JSON.stringify(data.result) %></div>
+	<H2>Service capabilities</H2>
+    <% if (data.capabilities) { %>
         <ul class="leftAlign">
-        <% for(var key in data.result) { %>
-            
-            <li><div class="leftAlign"><%= key %> : <%= data.result[key] %></div></li>
-            
+        <% for(var cap in data.capabilities) { %>
+		   <li>
+			   <h4><%= cap %></h4>
+			   <table border="1">
+				   <% for(var key in data.capabilities[cap]) { %>            
+						<tr><td><%= key %></td><td> <%= data.capabilities[cap][key] %></td></tr>
+					<% } %>
+				</table>
+			</li>            
         <% } %>
         </ul>
     <% } %>

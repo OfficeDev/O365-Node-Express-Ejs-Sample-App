@@ -28,6 +28,19 @@
 		<a href="/files">Files</a> |
 		<a href="/mail">Mail</a> 
     </div>	
+	<div class="leftAlign">
+		<h4>OAuth2 token</h4>
+		<% if (user) { for (var res in user.tokens) { %>
+			<table border="1" style="width:85%;text-align:left">
+				<% for (var key in user.tokens[res]) { %>
+					<tr>
+						<td><%= key %></td>
+						<td><%= user.tokens[res][key] %></td>
+					</tr>
+				<% } %>
+			</table>
+		<% }} %>
+	</div>
 </body>
 </html>
 

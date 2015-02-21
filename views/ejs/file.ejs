@@ -31,21 +31,13 @@
     </div>	
 	
     <div name="display" >
-    <h2>Files</h2>
-    <% if (data.result) { %>
-        <div class="leftAlign"><%= JSON.stringify(data.result) %></div>
-        <div>
-            <a href='/files/view?id=<%= data.result.Id %>'>View</a> |
-            <a href='/files/edit?id=<%= data.result.Id %>'>Edit</a> | 
-            <a href='/files/delete?id=<%= data.result.Id %>'>Delete</a>
-        </div>
-        
-        <% for(var key in data.result) { %>
-            
-            <div class="leftAlign"><%= key %> : <%= data.result[key] %></div>
-            
+    <h4>Drive</h4>
+    <% if (data.result) { %> 
+		<table border="1">       
+        <% for(var key in data.result) { %>            
+            <tr class="leftAlign"><td><%= key %></td><td><%= JSON.stringify(data.result[key]) %></td></tr>            
         <% } %>
-        
+        </table>
     <% } %>
     </div>
 

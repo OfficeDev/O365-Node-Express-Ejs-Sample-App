@@ -7,7 +7,7 @@ introduction, by way of a few tested examples, to getting started to explore
 Office 365 API features in an Express-based web application. Specifically, it covers how to
 
 - [sign in to a user's Office 365 account](#sign-in), using the [passport-azure-oauth](https://www.npmjs.com/package/passport-azure-oauth) module,
-- [discover available Office 365 API services](#discover services),
+- [discover available Office 365 API services](#discover-services),
 - [get mail messages](#get-mails) from the user's inbox, using the [request](https://github.com/request/request) module,
 - [view a specific mail message](#view-mail),
 - [delete a specific mail message](#delete-mail),

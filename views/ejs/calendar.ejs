@@ -37,7 +37,15 @@
 		<ul>
 			<% for (var i=0; i<data.events.length; i++) { %> 
 			<li>
-				<div><%= JSON.stringify(data.events[i]) %></div>
+				<h4><%= data.events[i].Subject %></h4>
+				<table border="1">
+					<% for (var key in data.events[i]) { %>
+					<tr>
+						<td><%= key %></td>
+						<td><%= JSON.stringify(data.events[i][key]) %></td>
+					</tr>
+					<% } %>
+				</table>
 			</li>
 			<% } %>
 		</ul>

@@ -7,6 +7,7 @@
     user.refresh_token = "";
     user.username = "";
     user.displayName = "";
+    user.capabilities = {};
 
     user.validate = function (result, next) {
         if (!result) {
@@ -26,7 +27,19 @@
             return next(null, user);
         }
     };
-    
+    user.setCapabilities = function(arrCaps) {
+        for (var i = 0; i < arrCaps.length; i++) {
+            if (!user.hasCapability(arrCaps[i].capability))
+            user.capabilities[arrCaps[i].capability] = arrCaps[i];
+        }
+    }
+    user.hasCapability = function (capability) {
+        if (user.capabilities.hasOwnProperty(capability)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     user.hasToken =  function(resourceUri) {
         if (user.tokens.hasOwnProperty(resourceUri)) {
             return true;

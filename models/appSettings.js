@@ -10,7 +10,7 @@
         clientId : "646a412d-c4a6-4a76-823a-eb0d70519dc5"
         ,clientSecret : "pi2o7cnLWpbJoH+CVNW3YXXkml/XysM7odVMEMeiCmQ="
         ,tenantId : "b7e72cd7-4df7-4e7e-b5ff-3310c56629e5"
-        ,resource : "https://outlook.office365.com/"
+        ,resource : "https://api.office.com/discovery/"
         // The redirectURL is set in AAD. For the following redirectURL,  
         //,redirectURL : "http://localhost:1337/auth/azureoauth/callback" 
         // The app needs to supply a matching middleware:
