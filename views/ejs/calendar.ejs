@@ -20,7 +20,7 @@
 	<div name="banner">
       <h1>Office 365 API Tasks | Canlendar</h1>
         <p>
-          <% if (data.user) { %><%= data.user.profile.displayname %> |  <% } %>
+          <% if (data.user) { %><%= data.user.displayname %> |  <% } %>
           <a href="/logout">Sign out</a>
         </p>
 	</div>
@@ -28,8 +28,9 @@
 		<a href="/discovery">Discovery</a> |
 		<b>Calendar</b> |
 		<a href="/contacts">Contacts</a> |
-		<a href="/file">File</a> |
-		<a href="/mail">Mail</a> 
+		<a href="/files">Files</a> |
+		<a href="/mail">Mail</a> | 
+		<a href="/site">Site lists</a> 
     </div>	
 	
 	<div name="events" class="leftAlign">
@@ -37,7 +38,15 @@
 		<ul>
 			<% for (var i=0; i<data.events.length; i++) { %> 
 			<li>
-				<div><%= JSON.stringify(data.events[i]) %></div>
+				<h4><%= data.events[i].Subject %></h4>
+				<table border="1">
+					<% for (var key in data.events[i]) { %>
+					<tr>
+						<td><%= key %></td>
+						<td><%= JSON.stringify(data.events[i][key]) %></td>
+					</tr>
+					<% } %>
+				</table>
 			</li>
 			<% } %>
 		</ul>

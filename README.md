@@ -3,20 +3,24 @@
 This simple Office 365 API sample app demonstrates how to program Office 365 REST API
 in a Web application using [Nodejs](http://nodejs.org/), [Expressjs](http://expressjs.com/) 
 and [Ejs](http://www.embeddedjs.com/). It is meant to provide a quick 
-introduction, by way of a few coding examples, to getting started to explore integrating 
+introduction, by way of a few tested examples, to getting started to explore  
 Office 365 API features in an Express-based web application. Specifically, it covers how to
 
 - [sign in to a user's Office 365 account](#sign-in), using the [passport-azure-oauth](https://www.npmjs.com/package/passport-azure-oauth) module,
+- [discover available Office 365 API services](#discover-services),
 - [get mail messages](#get-mails) from the user's inbox, using the [request](https://github.com/request/request) module,
 - [view a specific mail message](#view-mail),
 - [delete a specific mail message](#delete-mail),
 - [send a new mail message](#send-mail) to a specified recipient,
 - [reply a mail with comments](#reply-mail), 
 - [get the user's calendar events](#get-calendar-events),
-- [get the user's contacts](#get-contacts), and
+- [get the user's contacts](#get-contacts), 
+- [inspect the user's files drive on OneDrive for Business](#get-files),
+- [get the SharePoint site lists of Office 365](#get-site-lists) and
 - [make the app work](#make-app-work).
 
-As a sample app to show programming of Office 365 APIs, no elaborate patterns or error handlings are attempted for node/express/ejs programming. 
+As a sample app to show programming of Office 365 APIs, I made no attempts on elaborate programming patterns or error handlings.That doesn't mean you 
+should follow my example.  
  
 For more information about Office 365 REST API, see the [API Docs](https://msdn.microsoft.com/en-us/office/office365/api/api-catalog).
 
@@ -39,6 +43,11 @@ host name and port are configured for the app. For details of an implementation,
 The app caches the returned access token for use in subsequent HTTPS requests to access any Office 365 API functioinality. 
 If the access token is expired, it can be refreshed using the refresh token, provided that the refresh token remains valid. Otherwise, the app will 
 need to go through the sign-in process again.
+
+<a name="discover-services">
+## Discover Office 365 API services available for the user's
+
+This shows how to perform dicovery of the Office 365 API services availble for the signed-in user. 
 
 <a name="get-mails">
 ## Get mail messages from the user's Inbox
@@ -94,9 +103,36 @@ The app must have the `Calendar.Read` or `Calendar.Write` permission.
 This involves a GET request against the calendar events resource (`https://outlook.office365.com/api/v1.0/me/contacts`).
 The app must have the `Contacts.Read` or `Contacts.Write` permission.
 
+<a name="get-files">
+## Get the user's files on OneDrive for Business
+
+This involves a GET request against the OneDrive for Business `drive` resource 
+(`https://{tenant}-my.sharepoint.com/_api/v1.0/me/drive`). For an Office 365 developer site
+with the domain name of `contoso.onmicrosoft.com`, the `{tenant}` value is `contoso`.
+The app must have appropriate permissions to the Office 365 SharePoint Online service as configured
+in Azure Active Directory.
+
+Notice that you may need to specify `secureProtocol: 'TLSv1_method'` as an additional option to the request if you 
+get the `tunneling socket could not be established, cause=connect ECONNREFUSED` or a similar one (e.g., `ECONNRESET`) error. 
+
+<a name="get-site-lists">
+## Get SharePoint site lits
+
+This involves a GET request against the SharePoint site `lists` resource 
+(`https://{tenant}.sharepoint.com/_api/web/lists`). For an Office 365 developer site
+with the domain name of `contoso.onmicrosoft.com`, the `{tenant}` value is `contoso`.
+The app must have appropriate permissions to the Office 365 SharePoint Online service as configured
+in Azure Active Directory.
+
+Notice that you may need to specify `secureProtocol: 'TLSv1_method'` as an additional option to the request if you 
+get the `tunneling socket could not be established, cause=connect ECONNREFUSED` or a similar one (e.g., `ECONNRESET`) error. 
+You must aslo add `accept : 'application/json'` in the options settings if you expect to receive the response in JSON. Otherwise, 
+ you will get an XML payload.
 
 <a name="make-app-work">
 ## Make the app work
+
+- If you have not done so, install [node.js](http://nodejs.org/download/) to your working machine.
 
 - Configure the app in your Azure Active Directory (AAD) subscription. For more information on how to do this in general, see the setup insturctions listed in
   [Office 365 APIs Starter project for Android](https://github.com/OfficeDev/O365-Android-Start).

@@ -10,13 +10,16 @@ var appSettings = require('../models/appSettings.js');
 
 
 module.exports = function (app, passport, utils) {
+    app.use('/mail', function (req, res, next) {
+        passport.getAccessToken(appSettings.resources.exchange, req, res, next);
+    })
 
     // Get a messaget list in the user's Inbox using the O365 API,
     // displaying To, Subject and Preview for each message.
     app.get('/mail', function (req, res, next) {
         request.get(
             appSettings.apiEndpoints.exchangeBaseUrl + "/messages", 
-            { auth : { 'bearer' : passport.user.accessToken } },
+            { auth : { 'bearer' : passport.user.getToken(appSettings.resources.exchange).access_token } },
             function (error, response, body) {
                 if (error) {
                     next(error);
@@ -35,7 +38,7 @@ module.exports = function (app, passport, utils) {
         var id = url.parse(req.url, true).query.id;
         request.get(
             appSettings.apiEndpoints.exchangeBaseUrl + "/messages/" + id, 
-            { auth : { 'bearer' : passport.user.accessToken } },
+            { auth : { 'bearer' : passport.user.getToken(appSettings.resources.exchange).access_token } },
             function (error, response, body) {
                 if (error) {
                     next(error);
@@ -71,7 +74,7 @@ module.exports = function (app, passport, utils) {
         var id = url.parse(req.url, true).query.id;
         request.get(
             appSettings.apiEndpoints.exchangeBaseUrl + "/messages/" + id, 
-            { auth : { 'bearer' : passport.user.accessToken } },
+            { auth : { 'bearer' : passport.user.getToken(appSettings.resources.exchange).access_token } },
             function (error, response, body) {
                 if (error) {
                     next(error);
@@ -109,7 +112,7 @@ module.exports = function (app, passport, utils) {
         };
         var reqHeaders = { 'content-type': 'application/json'};
         var reqUrl = appSettings.apiEndpoints.exchangeBaseUrl + "/sendmail";
-        var reqAuth = { 'bearer': passport.user.accessToken };
+        var reqAuth = { 'bearer': passport.user.getToken(appSettings.resources.exchange).access_token };
 
         request.post(
             { url: reqUrl, headers: reqHeaders, body: JSON.stringify(reqBody), auth: reqAuth },        
@@ -140,7 +143,7 @@ module.exports = function (app, passport, utils) {
         var reqBody = { 'Comment' : req.body.comment };
         var reqHeaders = { 'content-type': 'application/json' };
         var reqUrl = appSettings.apiEndpoints.exchangeBaseUrl + "/messages/" + messageId + "/reply";
-        var reqAuth = { 'bearer': passport.user.accessToken };
+        var reqAuth = { 'bearer': passport.user.getToken(appSettings.resources.exchange).access_token };
         
         request.post(
             { url: reqUrl, headers: reqHeaders, body: JSON.stringify(reqBody), auth: reqAuth },        

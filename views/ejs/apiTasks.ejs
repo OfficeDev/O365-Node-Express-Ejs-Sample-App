@@ -17,7 +17,7 @@
 	<div name="banner">
       <h1>Office 365 API Tasks</h1>
         <p>
-          <% if (user) { %><%= user.profile.displayname %> |  <% } %>
+          <% if (user) { %><%= user.displayname %> |  <% } %>
           <a href="/logout">Sign out</a>
         </p>
 	</div>
@@ -25,9 +25,23 @@
 		<a href="/discovery">Discovery</a> |
 		<a href="/calendar">Calendar</a> |
 		<a href="/contacts">Contacts</a> |
-		<a href="/file">File</a> |
-		<a href="/mail">Mail</a> 
+		<a href="/files">Files</a> |
+		<a href="/mail">Mail</a> |
+		<a href="/site">Site lists</a>
     </div>	
+	<div class="leftAlign">
+		<h4>OAuth2 token</h4>
+		<% if (user) { for (var res in user.tokens) { %>
+			<table border="1" style="width:85%;text-align:left">
+				<% for (var key in user.tokens[res]) { %>
+					<tr>
+						<td><%= key %></td>
+						<td><%= user.tokens[res][key] %></td>
+					</tr>
+				<% } %>
+			</table>
+		<% }} %>
+	</div>
 </body>
 </html>
 

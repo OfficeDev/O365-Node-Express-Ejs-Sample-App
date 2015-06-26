@@ -9,8 +9,30 @@ var appSettings = require('../models/appSettings.js');
 
 // express app routes for discovery services rest api  calls
 module.exports = function (app, passport, utils) {
+    // This middleware checks for and obtain, if necessary, access_token for
+    // accessing Office 365 discovery service. 
+    app.use('/discovery', function (req, res, next) {
+        passport.getAccessToken(appSettings.resources.discovery, req, res, next);
+    })
+
     app.get('/discovery', function (req, res, next) {
-        res.render('discovery', { data: { user: passport.user } });
+        if (!passport.user.getToken(appSettings.resources.discovery)) {
+            return next('invalid token');
+        }
+        var fileUrl = appSettings.apiEndpoints.discoveryServiceBaseUrl + '/services';
+        var opts = { auth: { 'bearer' : passport.user.getToken(appSettings.resources.discovery).access_token } };
+        
+        require('request').get(fileUrl, opts, function (error, response, body) {
+            if (error) {
+                next(error);
+            }
+            else {
+                passport.user.setCapabilities(JSON.parse(body)['value']);
+                data = { user: passport.user, capabilities: passport.user.capabilities };
+                res.render('discovery', { data: data });
+            }
+        });
+
     });
 
 }

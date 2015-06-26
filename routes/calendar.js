@@ -1,16 +1,23 @@
-﻿// calendar.js
+﻿/*
+ *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
+ */
+
+// calendar.js
+
 var request = require('request');
 var appSettings = require('../models/appSettings.js');
 
-
 // express app routes for calendar REST api calls
 module.exports = function (app, passport, utils) {
-    
-    // get calendar events and displays the results in the raw odata format.
+    app.use('/calendar', function (req, res, next) {
+        passport.getAccessToken(appSettings.resources.exchange, req, res, next);
+    })
+
+    // get calendar events.
     app.get('/calendar', function (req, res, next) {
         var calendarUrl = appSettings.apiEndpoints.exchangeBaseUrl + "/events"; 
         request.get(calendarUrl,
-            { auth : { 'bearer' : passport.user.accessToken } },
+            { auth : { 'bearer' : passport.user.getToken(appSettings.resources.exchange).access_token } },
             function (error, response, body) {
             if (error) next(error)
             else if (!body) {

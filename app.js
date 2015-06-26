@@ -43,6 +43,7 @@ require('./routes/mail.js')(app, passport, utils);
 require('./routes/contacts.js')(app, passport, utils);
 require('./routes/calendar.js')(app, passport, utils);
 require('./routes/file.js')(app, passport, utils);
+require('./routes/site.js')(app, passport, utils);
 require('./routes/discovery.js')(app, passport, utils);
 
 

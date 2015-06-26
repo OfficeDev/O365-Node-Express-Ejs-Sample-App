@@ -33,6 +33,8 @@
     <Compile Include="app.js" />
     <Compile Include="models\appSettings.js" />
     <Compile Include="models\passport.js" />
+    <Compile Include="models\temp\appSettings.private.js" />
+    <Compile Include="models\temp\appSettings.public.js" />
     <Compile Include="models\user.js" />
     <Compile Include="models\utils.js" />
     <Compile Include="routes\calendar.js" />
@@ -42,6 +44,7 @@
     <Compile Include="routes\index.js" />
     <Compile Include="routes\mail.js" />
     <Compile Include="bin\www" />
+    <Compile Include="routes\site.js" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
@@ -55,10 +58,12 @@
     <Content Include="views\ejs\mail.ejs" />
     <Content Include="views\ejs\mailEdit.ejs" />
     <Content Include="views\ejs\mailReply.ejs" />
+    <Content Include="views\ejs\site.ejs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="models\" />
+    <Folder Include="models\temp\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />

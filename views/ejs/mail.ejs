@@ -19,7 +19,7 @@
       <div name="banner">
         <h1>Office 365 API Tasks | Mail</h1>
         <p>
-          <% if (data.user) { %><%= data.user.profile.displayname %> |  <% } %>
+          <% if (data.user) { %><%= data.user.displayname %> |  <% } %>
           <a href="/logout">Sign out</a>
         </p>
       </div>
@@ -27,8 +27,9 @@
         <a href="/discovery">Discovery</a> |
         <a href="/calendar">Calendar</a> |
         <a href="/contacts">Contacts</a> |
-        <a href="/file">File</a> |
-        <b>Mail</b>
+        <a href="/files">Files</a> |
+        <b>Mail</b> | 
+		<a href="/site">Site lists</a> 
       </div>
 
       <div name="messages">

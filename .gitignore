@@ -14,3 +14,7 @@ node_modules/
 
 # Log Files
 *.log
+
+# temp files
+models/temp/
+
