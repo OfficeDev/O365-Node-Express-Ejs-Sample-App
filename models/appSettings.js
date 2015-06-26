@@ -10,14 +10,14 @@
     
     // Configure the OAuth options to match your app.
     appSettings.oauthOptions = {
-        clientId : "<fill in your app's clientId from AAD>"
-        ,clientSecret : "<fill in your app's key from AAD>"
-        ,tenantId :  "<fill in the AAD tenant of your Office 365 accounut>"
+        clientId : "<your app clientId from AAD>"
+        ,clientSecret : "<your app key from AAD>"
+        ,tenantId :  "<your tenantId GUID from AAD>"
         ,resource : "https://api.office.com/discovery/"
 
         // The redirectURL is set in AAD. For the following redirectURL  
         // "http://localhost:1337/auth/azureoauth/callback", 
-        // The app needs to supply a matching middleware:
+        // the app needs to supply a matching middleware:
         //      app.get('/auth/azureoauth/callback', ...) 
         // to receive the auth results
     };
@@ -38,6 +38,7 @@
     };
     
     appSettings.useFiddler = false;
+
 
 })(module.exports);
 

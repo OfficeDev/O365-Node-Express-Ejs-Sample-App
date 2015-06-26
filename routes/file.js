@@ -24,11 +24,12 @@ module.exports = function (app, passport, utils) {
             return next('invalid token');
         } 
         var fileUrl = appSettings.apiEndpoints.oneDriveBusinessBaseUrl + '/drive';
+        
         var opts = {
             auth: { 'bearer' : passport.user.getToken(appSettings.resources.onedrive).access_token },
             secureProtocol: 'TLSv1_method'  // required of Shareoint site and OneDrive
         };
-        
+
         //For debugging purposes
         if ( appSettings.useFiddler) {
             opts.proxy = 'http://127.0.0.1:8888'; 
