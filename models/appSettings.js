@@ -12,7 +12,7 @@
     appSettings.oauthOptions = {
         clientId : "<your app clientId from AAD>"
         ,clientSecret : "<your app key from AAD>"
-        ,tenantId :  "<your tenantId GUID from AAD>"
+        ,tenantId : "<your tenantId GUID from AAD>"
         ,resource : "https://api.office.com/discovery/"
 
         // The redirectURL is set in AAD. For the following redirectURL  
@@ -28,7 +28,7 @@
         sharepoint : 'https://' + appSettings.tenant + '.sharepoint.com/',
         discovery : 'https://api.office.com/discovery/'
     }
-
+    
     appSettings.apiEndpoints = {
         exchangeBaseUrl : "https://outlook.office365.com/api/v1.0/me",
         oneDriveBusinessBaseUrl : "https://" + appSettings.tenant + "-my.sharepoint.com/_api/v1.0/me",

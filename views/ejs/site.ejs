@@ -28,19 +28,25 @@
 		<a href="/contacts">Contacts</a> |
 		<a href="/file">Files</a> | 
 		<a href="/mail">Mail</a> | 
-		<b>Site lists</b> 
+		<b>Site lists</b>: 
+		<a href="/site/list/create">Create a list</a>, 
+		<a href="/site/list/update">Change the list</a>, 
+		<a href="/site/list/get">Get the list</a>, 
+		<a href="/site/list/delete">Delete the list</a>
     </div>	
 	
-    <div name="display" >
+    <div name="display" class="leftAlign">
     <h4>O365 SharePoint List Data</h4>
     <% if (data.result) { %> 
-		<!-- %= JSON.stringify(data.result, null, 4)% -->
-		<table border="1">       
+		<pre><%= JSON.stringify(data.result, "\r\n", 4)%></pre>
+		<!-- table border="1">       
         <% for(var key in data.result) { %>            
             <tr class="leftAlign"><td><%= key %></td><td><%= JSON.stringify(data.result[key]) %></td></tr>            
         <% } %>
-        </table>
-    <% } %>
+        </table -->
+    <% }else{ %>
+		<pre>No content</pre>
+	<%}%>
     </div>
 
 </body>

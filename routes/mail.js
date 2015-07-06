@@ -120,9 +120,7 @@ module.exports = function (app, passport, utils) {
                 if (err) { next(err); }
                 else {
                     if (response.statusCode == 403) {
-                        err.status = response.statusCode;
-                        err.stack = body;
-                        err.message = "Failed to send mail to " + req.body.to;
+                        err = { status : response.statusCode, msg : body , stack : "Failed to send mail to " + req.body.to };
                         next(err);
                     }
                     else {
@@ -151,9 +149,7 @@ module.exports = function (app, passport, utils) {
                 if (err) { next(err); }
                 else {
                     if (response.statusCode == 403) {
-                        err.status = response.statusCode;
-                        err.stack = body;
-                        err.message = "Failed to reply mail to " + req.body.to;
+                        err = { status : response.statusCode, msg : body , stack : "Failed to reply mail to " + req.body.to };
                         next(err);
                     }
                     else {

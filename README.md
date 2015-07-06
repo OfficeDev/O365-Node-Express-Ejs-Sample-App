@@ -16,7 +16,8 @@ Office 365 API features in an Express-based web application. Specifically, it co
 - [get the user's calendar events](#get-calendar-events),
 - [get the user's contacts](#get-contacts), 
 - [inspect the user's files drive on OneDrive for Business](#get-files),
-- [get the SharePoint site lists of Office 365](#get-site-lists) and
+- [get the SharePoint site lists of Office 365](#get-site-lists) 
+- [create, update, read and delete an Office 365 SharePoint list](#get-site-lists) and
 - [make the app work](#make-app-work).
 
 As a sample app to show programming of Office 365 APIs, I made no attempts on elaborate programming patterns or error handlings.That doesn't mean you 
@@ -116,18 +117,23 @@ Notice that you may need to specify `secureProtocol: 'TLSv1_method'` as an addit
 get the `tunneling socket could not be established, cause=connect ECONNREFUSED` or a similar one (e.g., `ECONNRESET`) error. 
 
 <a name="get-site-lists">
-## Get SharePoint site lits
+## Work with Office 365 SharePoint site lits
 
-This involves a GET request against the SharePoint site `lists` resource 
+This involves a `HTTP GET` request against the SharePoint site `lists` resource 
 (`https://{tenant}.sharepoint.com/_api/web/lists`). For an Office 365 developer site
 with the domain name of `contoso.onmicrosoft.com`, the `{tenant}` value is `contoso`.
 The app must have appropriate permissions to the Office 365 SharePoint Online service as configured
 in Azure Active Directory.
 
+To create a list, use `HTTP POST` against the `lists` resource. To update or delete a list, use the `HTTP POST` request against the 
+URI of the list, specifying the `"X-HTTP-METHOD":"MERGE"` or `"X-HTTP-METHOD":"DELETE"` as a request header. 
+
 Notice that you may need to specify `secureProtocol: 'TLSv1_method'` as an additional option to the request if you 
 get the `tunneling socket could not be established, cause=connect ECONNREFUSED` or a similar one (e.g., `ECONNRESET`) error. 
 You must aslo add `accept : 'application/json'` in the options settings if you expect to receive the response in JSON. Otherwise, 
  you will get an XML payload.
+
+
 
 
 <a name="make-app-work">

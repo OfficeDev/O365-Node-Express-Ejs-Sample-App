@@ -34,9 +34,9 @@
     <% } %>
 	<div name="display" class="leftAlign">
 		<h1>Whoops! Something has gone wrong.</h1>
-		<p><%= message %></p>
-		<p><%= error.status %></p>
-		<pre><%= error.stack %></pre>        
+		<p>Message: <%= error.msg %></p>
+		<p>StatusCode: <%= error.status %></p>
+		<pre>StackTrace: <%= error.stack %></pre>        
 	</div>
 </body>
 </html>

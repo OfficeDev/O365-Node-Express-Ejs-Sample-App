@@ -41,8 +41,7 @@ module.exports = function (app, passport, utils) {
                 next(error);
             }
             else if (response.statusCode != 200) {
-                error.status = response.statusCode;
-                error.msg = body;
+                error = { status : response.statusCode, msg : body };
                 next(error);
             } else {
                 data = { user: passport.user, result: JSON.parse(body) };
