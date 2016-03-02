@@ -25,6 +25,39 @@ should follow my example.
  
 For more information about Office 365 REST API, see the [API Docs](https://msdn.microsoft.com/en-us/office/office365/api/api-catalog).
 
+<a name="make-app-work">
+## Make the app work
+
+- To run the app in Visual Studio, hit F5. 
+
+-  To run the app in node shell, go to the app's bin directory and type `node www` to start the server. Then open a browser and enter "http://localhost:1337" in the address bar, assuming the default setting is preserved.
+
+- If you have not done so, install [node.js](http://nodejs.org/download/) to your working machine.
+
+- To launch the app from the Visual Studio project, you must have the [Node.js Tools for Visual Studio](https://nodejstools.codeplex.com/releases/view/612573) installed.
+
+- Configure the app in your Azure Active Directory (AAD) subscription. For more information on how to do this in general, see the setup insturctions listed in
+  [Office 365 APIs Starter project for Android](https://github.com/OfficeDev/O365-Android-Start).
+
+- When granting the app permissions to other applications, make sure that no redudant permissions are selected. For example, 
+  do not select both _Read users' mail_ and _Read and write access to users' mail_ for Office 365 Exchange Online because the former 
+  is made redundant by the latter. Otherwise, you may get 403 error when trying to access the email service from the app.
+
+- The _SIGN-ON URL_ value in AAD must match that assigned for the nodejs app. 
+  for example if the node app is assigned an URL of `http://localhost:1337`, the AAD _SIGN-ON URL_ must have the same value. 
+
+- To receive the Azure authentication/authoization results via `passport-azure-oauth` module,  the corresponding Express route 
+  must have its path match the path of _REPLY URL_ in AAD. For example, if the _REPLY URL_ value is `http://localhost:1337/auth/azureOAuth/callback`, the app
+  must enact a routing rule of the `app.get('/auth/azureOAuth/callback', callback)` format.
+  
+- To ensure all the node modules are included in the project, run the `npm install` command under the app's main directory, 
+  where the _package.json_ file is located, from a shell window. 
+
+  If using Visual Studio, right click the **npm** node in the **Solution Explorer** to select **Install Missing npm Packages** before running the app.
+
+
+
+
 <a name="sign-in">   
 ## Sign in to Office 365 
 This demo uses the [_passport-azure-oauth_](https://www.npmjs.com/package/passport-azure-oauth) module for a user to sign in to his or her Office 365 account. 
@@ -132,42 +165,6 @@ Notice that you may need to specify `secureProtocol: 'TLSv1_method'` as an addit
 get the `tunneling socket could not be established, cause=connect ECONNREFUSED` or a similar one (e.g., `ECONNRESET`) error. 
 You must aslo add `accept : 'application/json'` in the options settings if you expect to receive the response in JSON. Otherwise, 
  you will get an XML payload.
-
-
-
-
-<a name="make-app-work">
-## Make the app work
-
-- If you have not done so, install [node.js](http://nodejs.org/download/) to your working machine.
-
-- To launch the app from the Visual Studio project, you must have the [Node.js Tools for Visual Studio](https://nodejstools.codeplex.com/releases/view/612573) installed.
-
-- Configure the app in your Azure Active Directory (AAD) subscription. For more information on how to do this in general, see the setup insturctions listed in
-  [Office 365 APIs Starter project for Android](https://github.com/OfficeDev/O365-Android-Start).
-
-- When granting the app permissions to other applications, make sure that no redudant permissions are selected. For example, 
-  do not select both _Read users' mail_ and _Read and write access to users' mail_ for Office 365 Exchange Online because the former 
-  is made redundant by the latter. Otherwise, you may get 403 error when trying to access the email service from the app.
-
-- The _SIGN-ON URL_ value in AAD must match that assigned for the nodejs app. 
-  for example if the node app is assigned an URL of `http://localhost:1337`, the AAD _SIGN-ON URL_ must have the same value. 
-
-- To receive the Azure authentication/authoization results via `passport-azure-oauth` module,  the corresponding Express route 
-  must have its path match the path of _REPLY URL_ in AAD. For example, if the _REPLY URL_ value is `http://localhost:1337/auth/azureOAuth/callback`, the app
-  must enact a routing rule of the `app.get('/auth/azureOAuth/callback', callback)` format.
-  
-- To ensure all the node modules are included in the project, run the `npm install` command under the app's main directory, 
-  where the _package.json_ file is located, from a shell window. 
-
-  If using Visual Studio, right click the **npm** node in the **Solution Explorer** to select **Install Missing npm Packages** before running the app.
-
-- To run the app in Visual Studio, hit F5. 
-
-  To run the app in node shell, go to the app's bin directory and type `node www` to start the server. Then open a browser and enter "http://localhost:1337" in the address bar, assuming the default setting is preserved.
-
-- Happy coding!
-
 
 
 ## Copyright
